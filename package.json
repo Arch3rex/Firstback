@@ -5,26 +5,25 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-    "lint": "eslint \"src/**/*.{js}\"",
-    "lint:staged": "lint-staged",
-    "lint:fix": "eslint --fix \"src/**/*.{js}\"",
-    "format:fix": "prettier --write \"src/**/*.{js}\"",
+    "start": "node server.js",
+    "lint": "eslint \"src/**/*.{js,jsx}\"",
+    "lint:fix": "eslint --fix \"src/**/*.{js,jsx}\"",
+    "format:fix": "prettier --write \"src/**/*.{js,jsx}\"",
     "format:staged": "pretty-quick --staged",
     "precommit": "npm run format:staged && npm run format:fix"
-  },
-  "husky": {
-    "hooks": {
-      "precommit": "npm run lint:fix && npm run precommit && lint-staged",
+    },
+    "husky": {
+      "hooks": {
+        "pre-commit": "npm run lint:fix && npm run precommit"
     }
   },
   "lint-staged": {
-    "src/**/*.{js}": [
-      "eslint --fix \"src/**/*.{js}\"",
-      "prettier --write \"src/**/*.{js}\"",
+    "src/**/*.{js,jsx}": [
+      "eslint --fix \"src/**/*.{js,jsx}\"",
       "git add"
     ]
   },
+    
   "author": "Arch3rex",
   "license": "ISC",
   "dependencies": {
@@ -39,10 +38,14 @@
   },
   "devDependencies": {
     "eslint": "^7.11.0",
-    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.21.4",
-    "eslint-plugin-react-hooks": "^4.1.2"
+    "eslint-plugin-react-hooks": "^4.1.2",
+    "husky": "^4.3.0",
+    "prettier": "^1.15.3",
+    "pretty-quick": "^1.8.0",
+    "lint-staged": "^10.4.0"
   }
 }

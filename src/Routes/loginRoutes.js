@@ -5,9 +5,9 @@ const userControll = require('../Controllers/userController');
 const router = express.Router();
 
 router.route('/register')
-  .post(userControll.postReg);
+    .post(userControll.postReg);
 
 router.route('/login')
-  .post(userControll.postLog);
+    .post(userControll.postLog);
 
 module.exports = router;
