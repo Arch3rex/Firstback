@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const User = require('../Models/Usermodel');
 
-express().use(bodyParser.urlencoded({extended: true}));
+express().use(bodyParser.urlencoded({ extended: true }));
 
 const postReg = (req, res) => {
   const newUser = new User({
@@ -23,7 +23,7 @@ const postReg = (req, res) => {
 const postLog = (req, res) => {
   const checkUname = req.body.username;
   const checkPwd = req.body.password;
-  User.findOne({username: checkUname}, (err, found) => {
+  User.findOne({ username: checkUname }, (err, found) => {
     if (err) {
       console.log(err);
     } else if (found) {

@@ -11,6 +11,13 @@
         "ecmaVersion": 12
     },
     "rules": {
-        "new-cap":"off"
+        "new-cap":"off",
+        "operator-linebreak": "off",
+        "arrow-parens": ["error", "as-needed"],
+        "indent": "off",
+        "object-curly-spacing": ["error", "always"],
+        "require-jsdoc": "off",
+        "linebreak-style": "off",
+        "max-len": ["error", { "code": 120 }]
     }
 }

@@ -4,13 +4,14 @@ const projControll = require('../Controllers/projectController');
 
 const router = express.Router();
 
-router.route('/projects/:uname')
-    .get(projControll.getProj)
+router
+  .route('/projects/:uname')
+  .get(projControll.getProj)
 
-    .post(projControll.postProj)
+  .post(projControll.postProj)
 
-    .patch(projControll.patchProj)
+  .patch(projControll.patchProj)
 
-    .delete(projControll.deleteProj);
+  .delete(projControll.deleteProj);
 
 module.exports = router;
