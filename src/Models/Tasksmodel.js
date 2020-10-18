@@ -1,4 +1,6 @@
+// TODO: rename file in camelCase
 const mongoose = require('mongoose');
+const connection = require('../lib/dbConnection');
 
 const taskSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
@@ -7,5 +9,5 @@ const taskSchema = new mongoose.Schema({
   deadline: String,
   project: { type: mongoose.Schema.Types.ObjectId, ref: 'Project' },
 });
-const Task = new mongoose.model('Task', taskSchema);
-module.exports = Task;
+
+module.exports = connection.model('Task', taskSchema);
