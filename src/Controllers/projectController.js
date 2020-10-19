@@ -1,8 +1,10 @@
+// TODO: rename file just project
 const mongoose = require('mongoose');
 const Project = require('../Models/Projectsmodel');
 const User = require('../Models/Usermodel');
 const Task = require('../Models/Tasksmodel');
 
+// TODO: rename just get
 const getProj = (req, res) => {
   const storeUser = req.params.uname;
   User.findOne({ username: storeUser })
@@ -16,6 +18,7 @@ const getProj = (req, res) => {
     });
 };
 
+// TODO: rename just post
 const postProj = (req, res) => {
   const storeUser = req.params.uname;
 
@@ -50,6 +53,7 @@ const postProj = (req, res) => {
   });
 };
 
+// TODO: rename just patch
 const patchProj = (req, res) => {
   Project.updateOne({ _id: req.body._id }, { $set: req.body }, (err, obj) => {
     if (err) {
