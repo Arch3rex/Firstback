@@ -1,4 +1,3 @@
-// TODO: rename file in camelCase
 const mongoose = require('mongoose');
 const connection = require('../lib/dbConnection');
 
@@ -7,6 +6,7 @@ const taskSchema = new mongoose.Schema({
   content: { type: String, required: true },
   prior: { type: Number, required: true },
   deadline: String,
+  isDone: Boolean,
   project: { type: mongoose.Schema.Types.ObjectId, ref: 'Project' },
 });
 

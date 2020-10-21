@@ -1,8 +1,9 @@
 const server = require('../server');
-const User = require('../src/Models/Usermodel');
+const User = require('../src/models/userModel');
 const connection = require('../src/lib/dbConnection');
 const axios = require('axios');
 const faker = require('faker');
+
 
 const PORT = process.env.APP_PORT_TEST;
 

@@ -1,4 +1,4 @@
-const Project = require('../Projectsmodel');
+const Project = require('../projectModel');
 
 describe('Projects model', () => {
   it('project models instance should contain empty tasks array ', () => {

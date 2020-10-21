@@ -1,11 +1,9 @@
-// TODO: rename file just project
 const mongoose = require('mongoose');
-const Project = require('../Models/Projectsmodel');
-const User = require('../Models/Usermodel');
-const Task = require('../Models/Tasksmodel');
+const Project = require('../models/projectModel');
+const User = require('../models/userModel');
+const Task = require('../models/taskModel');
 
-// TODO: rename just get
-const getProj = (req, res) => {
+const get = (req, res) => {
   const storeUser = req.params.uname;
   User.findOne({ username: storeUser })
     .populate('projects')
@@ -18,8 +16,7 @@ const getProj = (req, res) => {
     });
 };
 
-// TODO: rename just post
-const postProj = (req, res) => {
+const post = (req, res) => {
   const storeUser = req.params.uname;
 
   User.findOne({ username: storeUser }, (err, found) => {
@@ -53,8 +50,7 @@ const postProj = (req, res) => {
   });
 };
 
-// TODO: rename just patch
-const patchProj = (req, res) => {
+const patch = (req, res) => {
   Project.updateOne({ _id: req.body._id }, { $set: req.body }, (err, obj) => {
     if (err) {
       res.send(err);
@@ -64,7 +60,7 @@ const patchProj = (req, res) => {
   });
 };
 
-const deleteProj = (req, res) => {
+const todelete = (req, res) => {
   const storeId = req.body._id;
   const storeUser = req.params.uname;
   // remove project reference from user`s projects array
@@ -94,8 +90,8 @@ const deleteProj = (req, res) => {
 };
 
 module.exports = {
-  getProj,
-  postProj,
-  patchProj,
-  deleteProj,
+  get,
+  post,
+  patch,
+  todelete,
 };

@@ -1,13 +1,7 @@
-// TODO: rename file just user
-const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const User = require('../Models/Usermodel');
+const User = require('../models/userModel');
 
-// TODO: delete this (you have already used it at server.js)
-express().use(bodyParser.urlencoded({ extended: true }));
 
-// TODO: rename just post, also move in authentication controller
 const postReg = (req, res) => {
   const newUser = new User({
     _id: new mongoose.Types.ObjectId(),
@@ -24,7 +18,6 @@ const postReg = (req, res) => {
   });
 };
 
-// TODO: rename just post, also move in authentication controller
 const postLog = (req, res) => {
   const checkUname = req.body.username;
   const checkPwd = req.body.password;

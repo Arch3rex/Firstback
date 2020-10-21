@@ -1,5 +1,3 @@
-// TODO: rename file in camelCase
-
 const mongoose = require('mongoose');
 const connection = require('../lib/dbConnection');
 

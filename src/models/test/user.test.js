@@ -1,5 +1,5 @@
 const connection = require('../../lib/dbConnection');
-const User = require('../Usermodel');
+const User = require('../userModel');
 
 describe('User model', () => {
   afterAll(() => {

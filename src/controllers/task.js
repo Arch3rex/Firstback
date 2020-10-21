@@ -1,10 +1,8 @@
-// TODO: rename file just task
 const mongoose = require('mongoose');
-const Project = require('../Models/Projectsmodel');
-const Task = require('../Models/Tasksmodel');
+const Project = require('../models/projectModel');
+const Task = require('../models/taskModel');
 
-// TODO: rename just get
-const getTask = (req, res) => {
+const get = (req, res) => {
   const idstore = req.params._pid;
   Project.findOne({ _id: idstore })
     .populate('tasks')
@@ -23,14 +21,14 @@ const getTask = (req, res) => {
     });
 };
 
-// TODO: rename just post
-const postTask = (req, res) => {
+const post = (req, res) => {
   const storeproject = req.params._pid;
   const newTask = new Task({
     _id: new mongoose.Types.ObjectId(),
     content: req.body.content,
     prior: req.body.prior,
     deadline: req.body.deadline,
+    isDone: req.body.isDone,
     project: storeproject,
   });
 
@@ -54,8 +52,7 @@ const postTask = (req, res) => {
   );
 };
 
-// TODO: rename just patch
-const patchTask = (req, res) => {
+const patch = (req, res) => {
   Task.updateOne({ _id: req.body._id }, { $set: req.body }, (err, obj) => {
     if (err) {
       console.log(err);
@@ -65,8 +62,7 @@ const patchTask = (req, res) => {
   });
 };
 
-// TODO: rename just delete
-const deleteTask = (req, res) => {
+const todelete = (req, res) => {
   const prid = req.params._pid;
   const storeId = req.body._tid;
   // del task ref from porj`s tasks arr
@@ -85,8 +81,8 @@ const deleteTask = (req, res) => {
 };
 
 module.exports = {
-  getTask,
-  postTask,
-  patchTask,
-  deleteTask,
+  get,
+  post,
+  patch,
+  todelete,
 };
