@@ -4,7 +4,6 @@ const connection = require('../src/lib/dbConnection');
 const axios = require('axios');
 const faker = require('faker');
 
-
 const PORT = process.env.APP_PORT_TEST;
 
 
@@ -29,7 +28,6 @@ describe('User Api', () => {
     const response = await axios.post(`http://localhost:${PORT}/register`, targetUser);
 
     expect(response.status).toEqual(200);
-    expect(response.data).toEqual('200 Ok');
 
     // check that the new user is contains in db
     const sourceUser = await User.findOne({ username: targetUser.username });
