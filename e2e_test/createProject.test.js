@@ -5,7 +5,7 @@ const Project = require('../src/models/projectModel');
 const connection = require('../src/lib/dbConnection');
 const axios = require('axios');
 const faker = require('faker');
-const PORT = 5006;
+const PORT = process.env.APP_PORT_TEST;
 
 beforeAll(async () => {
     // before all test run server

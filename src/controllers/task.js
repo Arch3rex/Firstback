@@ -43,7 +43,9 @@ const post = (req, res, next) => {
           if (err) {
             next(err);
           } else {
-            res.status(200).json({ data: 'succsessfully updated', _id: newTask._id });
+            res
+              .status(200)
+              .json({ data: 'succsessfully updated', _id: newTask._id });
           }
         }
       );

@@ -1,17 +1,17 @@
 const express = require('express');
-
 const proj = require('../controllers/project');
+const jwtVerify =require('../controllers/verifyToken');
 
 const router = express.Router();
 
 router
   .route('/projects/:uname')
-  .get(proj.get)
+  .get(jwtVerify, proj.get)
 
-  .post(proj.post)
+  .post(jwtVerify, proj.post)
 
-  .patch(proj.patch)
+  .patch(jwtVerify, proj.patch)
 
-  .delete(proj.todelete);
+  .delete(jwtVerify, proj.todelete);
 
 module.exports = router;

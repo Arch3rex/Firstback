@@ -6,7 +6,7 @@ const connection = require('../src/lib/dbConnection');
 const axios = require('axios');
 const faker = require('faker');
 
-const PORT = 5001;
+const PORT = process.env.APP_PORT_TEST;
 
 beforeAll(async () => {
     // before all test run server
@@ -22,7 +22,6 @@ describe('create Task', () => {
     const createProject = {
        _id: new mongoose.Types.ObjectId(),
        name: faker.hacker.verb(),
-       user: new mongoose.Types.ObjectId(),
    }
   const newProject = await Project.create(createProject);
   expect(newProject).toBeDefined();
