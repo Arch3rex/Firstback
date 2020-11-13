@@ -1,50 +1,49 @@
 const mongoose = require('mongoose');
 const User = require('../models/userModel');
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const saltRounds = 10;
-
 const postReg = (req, res, next) => {
-  bcrypt.hash(req.body.password, saltRounds, (err, hash)=> {
-    if (err) {
-        next(err);
-    } else {
-        const newUser = new User({
+  const { username, password } = req.body;
+
+  const newUser = new User({
     _id: new mongoose.Types.ObjectId(),
-    username: req.body.username,
-    password: hash,
+    username,
   });
-    newUser.save( err => {
-    if (err) {
-      next(err);
-    } else {
-      res.status(200).json({ data: 'User created' });
-    }
-  });
-      }
-  });
+
+  newUser
+    .setPassword(password)
+    .then(() => {
+      newUser.save((err) => {
+        if (err) {
+          return next(err);
+        } else {
+          res.status(200).json({ data: newUser._id });
+        }
+      });
+    })
+    .catch(next);
 };
 
 const postLog = (req, res, next) => {
-  const checkUname = req.body.username;
-  const checkPwd = req.body.password;
-  User.findOne({ username: checkUname }, (err, found) => {
+  const { username, password } = req.body;
+  const accessDeniedError = new Error('Access denied!');
+  accessDeniedError.status = 403;
+
+  User.findOne({ username }, (err, found) => {
     if (err) {
-      next(err);
-    } else if (found) {
-      bcrypt.compare(checkPwd, found.password, (err, result)=>{
-        if (err) {
-          next(err);
-        } else if (result === true) {
-          const token = jwt.sign({ _id: found._id }, process.env.TOKEN_SECRET );
-          res.header('Authorization', token).status(200).json({ data: 'logged in', token: token });
-        }
-        else if (result === false) {
-          res.status(401).json({ data: 'wrong password' });
-        }
-      });
+      return next(err);
     }
+
+    if (!found) {
+      return next(accessDeniedError);
+    }
+
+    if (!found.checkPassword(password)) {
+      return next(accessDeniedError);
+    }
+
+    const token = jwt.sign({ _id: found._id }, process.env.TOKEN_SECRET, { expiresIn: '12h' });
+    res.status(200).json({ data: 'logged in', token: token });
   });
 };
 module.exports = {

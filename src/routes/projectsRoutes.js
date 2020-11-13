@@ -1,6 +1,6 @@
 const express = require('express');
 const proj = require('../controllers/project');
-const jwtVerify =require('../controllers/verifyToken');
+const jwtVerify =require('../lib/verifyToken');
 
 const router = express.Router();
 
